@@ -18,13 +18,20 @@ public class PlantManager : MonoBehaviour
 
     public List<GameObject> prefabs;
 
+    public GameObject audioLevelUpGO, audioDeathGO;
+
     public int[] plantLevel, plantXP;
 
     List<TextMeshProUGUI> xpText;
 
+    AudioSource audioLevelUp, audioDeath;
+
     // Start is called before the first frame update
     void Start()
     {
+        audioLevelUp = audioLevelUpGO.GetComponent<AudioSource>();
+        audioDeath = audioDeathGO.GetComponent<AudioSource>();
+
         plantLevel = new int[plantNum];
         plantXP = new int[plantNum];
 
@@ -86,6 +93,11 @@ public class PlantManager : MonoBehaviour
     {
         if(increase)
         {
+            if(plantLevel[plant] != 0)
+            {
+                audioLevelUp.Play();
+            }
+    
             plantLevel[plant] += 1;
         }
         else
@@ -94,7 +106,7 @@ public class PlantManager : MonoBehaviour
 
             if(plantLevel[plant] == 0)
             {
-                Debug.Log("uhoh");
+                audioDeath.Play();
             }
             
         }
