@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlantManager : MonoBehaviour
 {
@@ -13,15 +14,26 @@ public class PlantManager : MonoBehaviour
 
     public List<GameObject> holders;
 
+    public List<GameObject> textGOs;
+
     public List<GameObject> prefabs;
 
     public int[] plantLevel, plantXP;
+
+    List<TextMeshProUGUI> xpText;
 
     // Start is called before the first frame update
     void Start()
     {
         plantLevel = new int[plantNum];
         plantXP = new int[plantNum];
+
+        xpText = new List<TextMeshProUGUI>();
+
+        for(int i=0; i<textGOs.Count; i++)
+        {
+            xpText.Add(textGOs[i].GetComponent<TextMeshProUGUI>());
+        }
 
         for(int i=0; i<plantLevel.Length; i++)
         {
@@ -47,9 +59,16 @@ public class PlantManager : MonoBehaviour
 
     public void AlterPlantXP(int plant, int val)
     {
-        plantXP[plant] += val;
-
-        if(plantXP[plant] > 100)
+        if(plantLevel[plant] == maxLevel && plantXP[plant] > (100 * plantLevel[plant]))
+        {
+            plantXP[plant] = 100 * plantLevel[plant];
+        }
+        else
+        {
+            plantXP[plant] += val;
+        }
+        
+        if(plantXP[plant] > (100 * plantLevel[plant]) && plantLevel[plant] != maxLevel)
         {
             plantXP[plant] = plantXPAfterLevelUp;
             AlterPlantLevel(plant,true);
@@ -59,16 +78,15 @@ public class PlantManager : MonoBehaviour
             plantXP[plant] = plantXPAfterLevelDown;
             AlterPlantLevel(plant,false);
         }
+
+        UpdateText(plant, plantLevel[plant]);
     }
 
     void AlterPlantLevel(int plant, bool increase)
     {
         if(increase)
         {
-            if(plantLevel[plant] != maxLevel)
-            {
-                plantLevel[plant] += 1;
-            }
+            plantLevel[plant] += 1;
         }
         else
         {
@@ -98,5 +116,13 @@ public class PlantManager : MonoBehaviour
         //for now
         p.transform.localEulerAngles = new Vector3(0,180,0);
 
+        UpdateText(plant, level);
+    }
+
+    void UpdateText(int plant, int level)
+    {
+        string s = plantXP[plant].ToString() + "/" + (100*level).ToString();
+
+        xpText[plant].text = s;
     }
 }
