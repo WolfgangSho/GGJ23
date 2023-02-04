@@ -49,7 +49,7 @@ public class GodMovement : MonoBehaviour
     {
         float direction = Input.GetAxisRaw("Horizontal");
 
-        if(ableToMove)
+        if(ableToMove && powerTimer == 0)
         {
             if(direction > 0.5f)
             {
