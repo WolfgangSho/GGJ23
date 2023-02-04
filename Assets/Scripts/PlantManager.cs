@@ -93,8 +93,9 @@ public class PlantManager : MonoBehaviour
     {
         if(increase)
         {
-            if(plantLevel[plant] != 0)
+            if(plantLevel[plant] > 0)
             {
+                audioLevelUp.Stop();
                 audioLevelUp.Play();
             }
     
@@ -106,6 +107,7 @@ public class PlantManager : MonoBehaviour
 
             if(plantLevel[plant] == 0)
             {
+                audioDeath.Stop();
                 audioDeath.Play();
             }
             
