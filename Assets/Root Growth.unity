@@ -915,7 +915,9 @@ MonoBehaviour:
   grubSpeed: 0.4
   delayBeforeFirstGrub: 0
   maxGrubs: 3
+  rewardAmount: 2
   maxGrubHeight: 6
+  validGrubHeight: 1.1
 --- !u!1 &215077661
 GameObject:
   m_ObjectHideFlags: 0
@@ -12295,6 +12297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlantsGO: {fileID: 236265411}
+  GrubsGO: {fileID: 196707701}
   healAmount: 7
   healTick: 0.1
   healDuration: 1.5

@@ -17,7 +17,9 @@ public class GrubManager : MonoBehaviour
 
     public int maxGrubs;
 
-    public float maxGrubHeight;
+    public int rewardAmount;
+
+    public float maxGrubHeight, validGrubHeight;
 
     bool[] activeGrubs;
 
@@ -52,6 +54,21 @@ public class GrubManager : MonoBehaviour
         }
 
         return num;
+    }
+
+    public int killGrub(int lane)
+    {
+        int reward = -1;
+
+        if(grubGOs[lane].transform.localPosition.y > validGrubHeight)
+        {
+            reward = rewardAmount;
+
+            grubGOs[lane].transform.localPosition = Vector3.zero;
+            activeGrubs[lane] = false;
+        }
+
+        return reward;
     }
 
     // Update is called once per frame

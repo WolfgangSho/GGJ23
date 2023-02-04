@@ -6,6 +6,8 @@ using TMPro;
 public class GodMovement : MonoBehaviour
 {
     public GameObject PlantsGO;
+
+    public GameObject GrubsGO;
     
     public int healAmount;
 
@@ -35,6 +37,8 @@ public class GodMovement : MonoBehaviour
 
     PlantManager pm;
 
+    GrubManager grub;
+
     GameObject particles,healsTestGO;
 
     TextMeshProUGUI healsText;
@@ -45,6 +49,7 @@ public class GodMovement : MonoBehaviour
     void Start()
     {
         pm = PlantsGO.GetComponent<PlantManager>();
+        grub = GrubsGO.GetComponent<GrubManager>();
         particles = transform.GetChild(0).gameObject;
         healsTestGO = transform.GetChild(1).GetChild(0).gameObject;
         healsText = healsTestGO.GetComponent<TextMeshProUGUI>();
@@ -90,7 +95,14 @@ public class GodMovement : MonoBehaviour
         {
             particles.SetActive(true);
             powerTimer = healDuration;
-            healsLeft--;
+
+            healsLeft += grub.killGrub(godIndex);
+
+            if(healsLeft > maxHeals)
+            {
+                healsLeft = maxHeals;
+            }
+            
             UpdateHealsText();
         }
 
