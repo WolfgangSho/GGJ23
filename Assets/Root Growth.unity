@@ -11236,8 +11236,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlantsGO: {fileID: 236265411}
-  healAmount: 5
-  healTick: 0.5
+  healAmount: 7
+  healTick: 0.1
   healDuration: 1.5
   moveAmount: 3.5
   moveRepeatSeconds: 0.3
@@ -11481,9 +11481,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 774b2daa059ff0c479cd1cea3ac4c61e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlantsGO: {fileID: 236265411}
   moveAmount: 3.5
   minTimeToMove: 0.05
   maxTimeToMove: 0.9
+  damageAmount: 1
+  damageTick: 0.1
   centreIndex: 2
   maxIndex: 4
 --- !u!1 &1397764630
