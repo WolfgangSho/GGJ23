@@ -24,9 +24,11 @@ public class GodMovement : MonoBehaviour
 
     bool ableToMove;
 
-    float moveTimer, healTimer;
+    float moveTimer, healTimer, powerTimer;
 
     PlantManager pm;
+
+    GameObject particles;
 
     
 
@@ -34,6 +36,9 @@ public class GodMovement : MonoBehaviour
     void Start()
     {
         pm = PlantsGO.GetComponent<PlantManager>();
+        particles = transform.GetChild(0).gameObject;
+        particles.SetActive(false);
+
         godIndex = centreIndex;
         UpdatePosition();
         ableToMove = true;
@@ -67,10 +72,17 @@ public class GodMovement : MonoBehaviour
             }
         }
 
-        if(healTimer == 0)
+        if(Input.GetKeyDown("space") && !particles.activeSelf)
+        {
+            particles.SetActive(true);
+            powerTimer = healDuration;
+        }
+
+        if(healTimer == 0 && powerTimer > 0)
         {
             pm.AlterPlantXP(godIndex,healAmount);
             healTimer = healTick;
+            
         }
         else
         {
@@ -80,6 +92,14 @@ public class GodMovement : MonoBehaviour
             {
                 healTimer = 0;
             }
+        }
+
+        powerTimer -= Time.deltaTime;
+
+        if(powerTimer <= 0)
+        {
+            powerTimer = 0;
+            particles.SetActive(false);
         }
     }
 

@@ -11238,6 +11238,7 @@ MonoBehaviour:
   PlantsGO: {fileID: 236265411}
   healAmount: 5
   healTick: 0.5
+  healDuration: 1.5
   moveAmount: 3.5
   moveRepeatSeconds: 0.3
   centreIndex: 2
