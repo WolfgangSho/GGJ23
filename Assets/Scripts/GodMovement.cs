@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GodMovement : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class GodMovement : MonoBehaviour
     public float healTick;
 
     public float healDuration;
+
+    public int maxHeals;
+
+    public int startingHeals;
     
     public float moveAmount;
 
@@ -24,11 +29,15 @@ public class GodMovement : MonoBehaviour
 
     bool ableToMove;
 
+    int healsLeft;
+
     float moveTimer, healTimer, powerTimer;
 
     PlantManager pm;
 
-    GameObject particles;
+    GameObject particles,healsTestGO;
+
+    TextMeshProUGUI healsText;
 
     
 
@@ -37,11 +46,16 @@ public class GodMovement : MonoBehaviour
     {
         pm = PlantsGO.GetComponent<PlantManager>();
         particles = transform.GetChild(0).gameObject;
+        healsTestGO = transform.GetChild(1).GetChild(0).gameObject;
+        healsText = healsTestGO.GetComponent<TextMeshProUGUI>();
         particles.SetActive(false);
 
         godIndex = centreIndex;
-        UpdatePosition();
         ableToMove = true;
+        healsLeft = startingHeals;
+
+        UpdatePosition();
+        UpdateHealsText();
     }
 
     // Update is called once per frame
@@ -72,10 +86,12 @@ public class GodMovement : MonoBehaviour
             }
         }
 
-        if(Input.GetButtonDown("Fire1") && !particles.activeSelf)
+        if(Input.GetButtonDown("Fire1") && !particles.activeSelf && healsLeft > 0)
         {
             particles.SetActive(true);
             powerTimer = healDuration;
+            healsLeft--;
+            UpdateHealsText();
         }
 
         if(healTimer == 0 && powerTimer > 0)
@@ -134,5 +150,10 @@ public class GodMovement : MonoBehaviour
     {
         float pos = godIndex * moveAmount;
         transform.localPosition = new Vector3(pos,0,0);
+    }
+
+    void UpdateHealsText()
+    {
+        healsText.SetText(healsLeft.ToString());
     }
 }
