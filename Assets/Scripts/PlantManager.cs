@@ -73,7 +73,7 @@ public class PlantManager : MonoBehaviour
             plantXP[plant] = plantXPAfterLevelUp;
             AlterPlantLevel(plant,true);
         }
-        else if(plantXP[plant] < 0)
+        else if(plantXP[plant] <= 0 && plantLevel[plant] >= 0)
         {
             plantXP[plant] = plantXPAfterLevelDown;
             AlterPlantLevel(plant,false);
@@ -99,22 +99,28 @@ public class PlantManager : MonoBehaviour
             
         }
 
-        if(plantLevel[plant] > 0)
-        {
-            UpdatePlantPrefab(plant, plantLevel[plant]);
-        }
+        UpdatePlantPrefab(plant, plantLevel[plant]);
     }
 
     void UpdatePlantPrefab(int plant, int level)
     {
-        Destroy(holders[plant].transform.GetChild(0).gameObject);
+        if(level >= 0)
+        {
+            Destroy(holders[plant].transform.GetChild(0).gameObject);
 
-        GameObject p = Instantiate(prefabs[level-1],holders[plant].transform.position,Quaternion.identity) as GameObject;
+            
+            GameObject p = Instantiate(prefabs[level],holders[plant].transform.position,Quaternion.identity) as GameObject;
 
-        p.transform.SetParent(holders[plant].transform);
+            p.transform.SetParent(holders[plant].transform);
 
-        //for now
-        p.transform.localEulerAngles = new Vector3(0,180,0);
+            //for now
+            p.transform.localEulerAngles = new Vector3(0,180,0);
+
+            if(level == 0)
+            {
+                 plantLevel[plant] = -1;
+            }
+        }
 
         UpdateText(plant, level);
     }
@@ -122,6 +128,11 @@ public class PlantManager : MonoBehaviour
     void UpdateText(int plant, int level)
     {
         string s = plantXP[plant].ToString() + "/" + (100*level).ToString();
+
+        if(level < 1)
+        {
+            s = "";
+        }
 
         xpText[plant].text = s;
     }
