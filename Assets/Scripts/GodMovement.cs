@@ -8,6 +8,8 @@ public class GodMovement : MonoBehaviour
     public GameObject PlantsGO;
 
     public GameObject GrubsGO;
+
+    public GameObject audioHealGO;
     
     public int healAmount;
 
@@ -43,6 +45,8 @@ public class GodMovement : MonoBehaviour
 
     TextMeshProUGUI healsText;
 
+    AudioSource audioHeal;
+
     
 
     // Start is called before the first frame update
@@ -53,6 +57,7 @@ public class GodMovement : MonoBehaviour
         particles = transform.GetChild(0).gameObject;
         healsTestGO = transform.GetChild(1).GetChild(0).gameObject;
         healsText = healsTestGO.GetComponent<TextMeshProUGUI>();
+        audioHeal = audioHealGO.GetComponent<AudioSource>();
         particles.SetActive(false);
 
         godIndex = centreIndex;
@@ -102,8 +107,11 @@ public class GodMovement : MonoBehaviour
             {
                 healsLeft = maxHeals;
             }
-            
+
             UpdateHealsText();
+
+            audioHeal.Stop();
+            audioHeal.Play();
         }
 
         if(healTimer == 0 && powerTimer > 0)
