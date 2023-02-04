@@ -6,6 +6,8 @@ public class GrubManager : MonoBehaviour
 {
     
     public GameObject[] grubGOs;
+
+    public GameObject PlantManagerGO;
     
     public float minTime, maxTime;
 
@@ -21,11 +23,14 @@ public class GrubManager : MonoBehaviour
 
     float timer;
 
+    PlantManager pm;
+
     // Start is called before the first frame update
     void Start()
     {
-        timer = delayBeforeFirstGrub;
+        pm = PlantManagerGO.GetComponent<PlantManager>();
 
+        timer = delayBeforeFirstGrub;
         activeGrubs = new bool[grubGOs.Length];
         
         for(int i=0; i<activeGrubs.Length; i++)
@@ -97,7 +102,7 @@ public class GrubManager : MonoBehaviour
             if(grubGOs[i].transform.localPosition.y > maxGrubHeight)
             {
                 //call damage effect
-                Debug.Log("pow");
+                pm.AlterPlantXP(i,-500);
                 //reset grub
                 grubGOs[i].transform.localPosition = Vector3.zero;
                 activeGrubs[i] = false;   

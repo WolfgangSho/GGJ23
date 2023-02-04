@@ -909,6 +909,7 @@ MonoBehaviour:
   - {fileID: 1160437325}
   - {fileID: 94154531}
   - {fileID: 798232748}
+  PlantManagerGO: {fileID: 236265411}
   minTime: 0.7
   maxTime: 0.7
   grubSpeed: 0.4
