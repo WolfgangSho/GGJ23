@@ -72,7 +72,7 @@ public class GodMovement : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown("space") && !particles.activeSelf)
+        if(Input.GetButtonDown("Fire1") && !particles.activeSelf)
         {
             particles.SetActive(true);
             powerTimer = healDuration;
