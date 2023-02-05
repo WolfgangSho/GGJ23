@@ -20,13 +20,13 @@ public class PlantManager : MonoBehaviour
 
     public List<GameObject> prefabs;
 
-    public GameObject audioLevelUpGO, audioDeathGO;
+    public GameObject audioLevelUpGO, audioLevelDownGO, audioDeathGO;
 
     public int[] plantLevel, plantXP;
 
     List<TextMeshProUGUI> xpText;
 
-    AudioSource audioLevelUp, audioDeath;
+    AudioSource audioLevelUp, audioLevelDown, audioDeath;
 
     TimeManager tim;
 
@@ -35,6 +35,7 @@ public class PlantManager : MonoBehaviour
     {
         tim = TimeManagerGO.GetComponent<TimeManager>();
         audioLevelUp = audioLevelUpGO.GetComponent<AudioSource>();
+        audioLevelDown = audioLevelDownGO.GetComponent<AudioSource>();
         audioDeath = audioDeathGO.GetComponent<AudioSource>();
 
         plantLevel = new int[plantNum];
@@ -85,7 +86,7 @@ public class PlantManager : MonoBehaviour
             }
         }
         
-        if(plantXP[plant] > (100 * plantLevel[plant]) && plantLevel[plant] != maxLevel)
+        if(plantXP[plant] >= (100 * plantLevel[plant]) && plantLevel[plant] != maxLevel)
         {
             plantXP[plant] = plantXPAfterLevelUp;
             AlterPlantLevel(plant,true);
@@ -119,6 +120,12 @@ public class PlantManager : MonoBehaviour
             {
                 audioDeath.Stop();
                 audioDeath.Play();
+            }
+            else
+            {
+                audioLevelDown.Stop();
+                audioLevelDown.Play();
+
             }
             
         }
