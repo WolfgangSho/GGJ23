@@ -15,6 +15,10 @@ public class TimeManager : MonoBehaviour
     public float timeLimit;
     public GameObject moonTextGO;
 
+    public int[] DevilDamageScale, MaxGrubScale;
+    
+    public float[] GrubSpawnMinScale, GrubSpawnMaxScale, DevilMovementMinScale, DevilMovementMaxScale;
+
     float timeLeft;
 
     TextMeshProUGUI moonText, scoreText;
