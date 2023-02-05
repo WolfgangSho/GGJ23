@@ -40,6 +40,21 @@ public class DevilMovement : MonoBehaviour
         
     }
 
+    public void ChangeDamage(int d)
+    {
+        damageAmount = d;
+    }
+
+    public void ChangeMinMovement(float m)
+    {
+        minTimeToMove = m;
+    }
+
+    public void ChangeMaxMovement(float m)
+    {
+        maxTimeToMove = m;
+    }
+
     // Update is called once per frame
     void Update()
     {

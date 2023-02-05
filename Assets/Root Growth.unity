@@ -6178,12 +6178,6 @@ MonoBehaviour:
   audioDeathGO: {fileID: 2130743458}
   plantLevel: 
   plantXP: 
-  DevilDamageScale: 
-  MaxGrubScale: 
-  GrubSpawnMinScale: []
-  GrubSpawnMaxScale: []
-  DevilMovementMinScale: []
-  DevilMovementMaxScale: []
 --- !u!1 &242821512
 GameObject:
   m_ObjectHideFlags: 0
@@ -8306,7 +8300,7 @@ MonoBehaviour:
   FailScreen: {fileID: 927912884}
   WinScreen: {fileID: 1367004648}
   ScoreTextGO: {fileID: 322440628}
-  timeLimit: 20
+  timeLimit: 181
   moonTextGO: {fileID: 1860123247}
   DevilDamageScale: 0100000004000000
   MaxGrubScale: 0100000004000000

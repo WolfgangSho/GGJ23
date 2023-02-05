@@ -59,7 +59,9 @@ public class TimeManager : MonoBehaviour
 
     float Scale()
     {
-        float scaled = timeLeft/(timeLimit*0.8f);
+        float timeElapsed = timeLimit - timeLeft;
+
+        float scaled = timeElapsed/(timeLimit*0.8f);
 
         if(scaled > 1)
         {
@@ -77,18 +79,34 @@ public class TimeManager : MonoBehaviour
 
         float toAdd = diff * scaled;
 
-        return Mathf.CeilToInt(scalar[0] + toAdd);
+        return Mathf.RoundToInt(scalar[0] + toAdd);
     }
 
-    float ScaledFloat(float[] scalar)
+    float ScaledFloat(float[] scalar, bool increasing)
     {
         float scaled = Scale();
-
-        float diff = scalar[1] - scalar[0];
+        
+        float diff;
+        
+        if(increasing)
+        {
+            diff = scalar[1] - scalar[0];
+        }
+        else
+        {
+            diff = scalar[0] - scalar[1];
+        }
 
         float toAdd = diff * scaled;
 
-        return scalar[0] + toAdd;
+        if (increasing)
+        {
+            return scalar[0] + toAdd;
+        }
+        else
+        {
+            return scalar[1] + toAdd;
+        }
     }
 
     public void PlayGame()
@@ -188,7 +206,13 @@ public class TimeManager : MonoBehaviour
 
     void SetScalars()
     {
-        Debug.Log(ScaledFloat(DevilMovementMinScale));
+        Devil.ChangeDamage(ScaledInt(DevilDamageScale));
+        Devil.ChangeMinMovement(ScaledFloat(DevilMovementMinScale,false));
+        Devil.ChangeMaxMovement(ScaledFloat(DevilMovementMaxScale,false));
+
+        Grub.ChangeMaxGrubs(ScaledInt(MaxGrubScale));
+        Grub.ChangeMinSpawn(ScaledFloat(GrubSpawnMinScale,false));
+        Grub.ChangeMaxSpawn(ScaledFloat(GrubSpawnMaxScale,false));
     }
 
     public void GameEnd(bool win)

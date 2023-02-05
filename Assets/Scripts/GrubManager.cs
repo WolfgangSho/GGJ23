@@ -43,6 +43,21 @@ public class GrubManager : MonoBehaviour
         }
     }
 
+    public void ChangeMaxGrubs(int grubs)
+    {
+        maxGrubs = grubs;
+    }
+
+    public void ChangeMinSpawn(float m)
+    {
+        minTime = m;
+    }
+
+    public void ChangeMaxSpawn(float m)
+    {
+        maxTime = m;
+    }
+
     int movingGrubs()
     {
         int num = 0;
