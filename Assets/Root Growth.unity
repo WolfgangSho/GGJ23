@@ -14874,7 +14874,7 @@ MonoBehaviour:
   maxHeals: 10
   startingHeals: 7
   moveAmount: 3.5
-  moveRepeatSeconds: 0.03
+  moveRepeatSeconds: 0.1
   centreIndex: 2
   maxIndex: 4
 --- !u!65 &1045498541
