@@ -5,17 +5,21 @@ using TMPro;
 
 public class TimeManager : MonoBehaviour
 {
+    public GameObject PlantManagerGO;
+    
     public GameObject StartScreen,HowToScreen,About1Screen,About2Screen;
     
     public GameObject CanvasHolder, GodHolder,MoonHolder,DevilHolder,GrubHolder;
 
-    public GameObject FailScreen, WinScreen;
+    public GameObject FailScreen, WinScreen, ScoreTextGO;
     public float timeLimit;
     public GameObject moonTextGO;
 
     float timeLeft;
 
-    TextMeshProUGUI moonText;
+    TextMeshProUGUI moonText, scoreText;
+
+    PlantManager pm;
 
     GodMovement God;
     DevilMovement Devil;
@@ -27,16 +31,19 @@ public class TimeManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pm = PlantManagerGO.GetComponent<PlantManager>();
+
         God = GodHolder.GetComponent<GodMovement>();
         Devil = DevilHolder.GetComponent<DevilMovement>();
         Moon = MoonHolder.GetComponent<MoonRise>();
         Grub = GrubHolder.GetComponent<GrubManager>();
 
         moonText = moonTextGO.GetComponent<TextMeshProUGUI>();
+        scoreText = ScoreTextGO.GetComponent<TextMeshProUGUI>();
         timeLeft = timeLimit;
 
         FailScreen.SetActive(false);
-
+        WinScreen.SetActive(false);
 
         HowToScreen.SetActive(false);
         About1Screen.SetActive(false);
@@ -134,21 +141,24 @@ public class TimeManager : MonoBehaviour
 
             if(timeLeft <= 0)
             {
-                //do something
+                GameEnd(true);
             }
         }
     }
 
     public void GameEnd(bool win)
     {
+        Pause();
+
         if(win)
         {
+            scoreText.text = pm.GetScore() + "%";
+            WinScreen.SetActive(true);
 
         }
         else
         {
             FailScreen.SetActive(true);
-            Pause();
         }
     }
 }

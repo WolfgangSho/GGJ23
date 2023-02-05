@@ -170,4 +170,19 @@ public class PlantManager : MonoBehaviour
 
         xpText[plant].text = s;
     }
+
+    public int GetScore()
+    {
+        float score = 0;
+
+        for(int i=0; i<plantLevel.Length;i++)
+        {
+            if(plantLevel[i] > 0)
+            {
+                score += plantLevel[i];
+            }
+        }
+
+        return Mathf.CeilToInt(score/20f*100f);
+    }
 }
