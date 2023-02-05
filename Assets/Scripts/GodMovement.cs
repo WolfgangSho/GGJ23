@@ -5,6 +5,8 @@ using TMPro;
 
 public class GodMovement : MonoBehaviour
 {
+
+    public GameObject TimeManagerGO;
     public GameObject PlantsGO;
 
     public GameObject GrubsGO;
@@ -37,6 +39,8 @@ public class GodMovement : MonoBehaviour
 
     float moveTimer, healTimer, powerTimer;
 
+    TimeManager tim;
+    
     PlantManager pm;
 
     GrubManager grub;
@@ -54,6 +58,7 @@ public class GodMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        tim = TimeManagerGO.GetComponent<TimeManager>();
         pm = PlantsGO.GetComponent<PlantManager>();
         grub = GrubsGO.GetComponent<GrubManager>();
         particles = transform.GetChild(0).gameObject;
@@ -110,6 +115,11 @@ public class GodMovement : MonoBehaviour
                 if(healsLeft > maxHeals)
                 {
                     healsLeft = maxHeals;
+                }
+
+                if(healsLeft == 0)
+                {
+                    tim.GameEnd(false);
                 }
 
                 UpdateHealsText();

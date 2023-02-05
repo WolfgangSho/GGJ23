@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class TimeManager : MonoBehaviour
@@ -30,6 +31,8 @@ public class TimeManager : MonoBehaviour
     MoonRise Moon;
     GrubManager Grub;
 
+    AudioSource mainMusic;
+
     bool unpaused;
 
     // Start is called before the first frame update
@@ -44,6 +47,7 @@ public class TimeManager : MonoBehaviour
 
         moonText = moonTextGO.GetComponent<TextMeshProUGUI>();
         scoreText = ScoreTextGO.GetComponent<TextMeshProUGUI>();
+        mainMusic = GetComponent<AudioSource>();
         timeLeft = timeLimit;
 
         FailScreen.SetActive(false);
@@ -113,6 +117,9 @@ public class TimeManager : MonoBehaviour
     {
         StartScreen.SetActive(false);
         UnPause();
+
+        mainMusic.Stop();
+        mainMusic.Play();
     }
 
     public void BackButton()
@@ -174,6 +181,8 @@ public class TimeManager : MonoBehaviour
         Devil.Pause();
         Moon.Pause();
         Grub.Pause();
+
+        mainMusic.Pause();
     }
 
     public void UnPause()
@@ -184,6 +193,8 @@ public class TimeManager : MonoBehaviour
         Devil.UnPause();
         Moon.UnPause();
         Grub.UnPause();
+
+        mainMusic.UnPause();
     }
 
     // Update is called once per frame
@@ -229,5 +240,10 @@ public class TimeManager : MonoBehaviour
         {
             FailScreen.SetActive(true);
         }
+    }
+
+    public void TryAgain()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
