@@ -12,7 +12,7 @@ public class MoonRise : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        unpaused = true;
+        
     }
 
     // Update is called once per frame
@@ -29,7 +29,7 @@ public class MoonRise : MonoBehaviour
         unpaused = false;
     }
 
-    public void Unpause()
+    public void UnPause()
     {
         unpaused = true;
     }

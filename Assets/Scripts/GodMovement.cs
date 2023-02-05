@@ -66,8 +66,6 @@ public class GodMovement : MonoBehaviour
         ableToMove = true;
         healsLeft = startingHeals;
 
-        unpaused = true;
-
         UpdatePosition();
         UpdateHealsText();
     }
@@ -189,7 +187,7 @@ public class GodMovement : MonoBehaviour
         unpaused = false;
     }
 
-    public void Unpause()
+    public void UnPause()
     {
         unpaused = true;
     }

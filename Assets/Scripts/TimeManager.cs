@@ -5,6 +5,7 @@ using TMPro;
 
 public class TimeManager : MonoBehaviour
 {
+    public GameObject CanvasHolder, GodHolder,MoonHolder,DevilHolder,GrubHolder;
     public float timeLimit;
     public GameObject moonTextGO;
 
@@ -12,11 +13,25 @@ public class TimeManager : MonoBehaviour
 
     TextMeshProUGUI moonText;
 
+    GodMovement God;
+    DevilMovement Devil;
+    MoonRise Moon;
+    GrubManager Grub;
+
+    bool unpaused;
+
     // Start is called before the first frame update
     void Start()
     {
+        God = GodHolder.GetComponent<GodMovement>();
+        Devil = DevilHolder.GetComponent<DevilMovement>();
+        Moon = MoonHolder.GetComponent<MoonRise>();
+        Grub = GrubHolder.GetComponent<GrubManager>();
+
         moonText = moonTextGO.GetComponent<TextMeshProUGUI>();
         timeLeft = timeLimit;
+
+        UnPause();
         
     }
 
@@ -44,19 +59,39 @@ public class TimeManager : MonoBehaviour
         return s;
     }
 
+    public void Pause()
+    {
+        unpaused = false;
+
+        God.Pause();
+        Devil.Pause();
+        Moon.Pause();
+        Grub.Pause();
+    }
+
+    public void UnPause()
+    {
+        unpaused = true;
+
+        God.UnPause();
+        Devil.UnPause();
+        Moon.UnPause();
+        Grub.UnPause();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        timeLeft -= Time.deltaTime;
-
-        SetMoonText();
-
-        if(timeLeft <= 0)
+        if(unpaused)
         {
-            //do something
+            timeLeft -= Time.deltaTime;
+
+            SetMoonText();
+
+            if(timeLeft <= 0)
+            {
+                //do something
+            }
         }
-
-
-        
     }
 }

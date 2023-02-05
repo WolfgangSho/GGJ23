@@ -6,6 +6,8 @@ using TMPro;
 public class PlantManager : MonoBehaviour
 {
 
+    public GameObject TimeManagerGO;
+
     public int plantNum;
 
     public int maxLevel;
@@ -26,9 +28,12 @@ public class PlantManager : MonoBehaviour
 
     AudioSource audioLevelUp, audioDeath;
 
+    TimeManager tim;
+
     // Start is called before the first frame update
     void Start()
     {
+        tim = TimeManagerGO.GetComponent<TimeManager>();
         audioLevelUp = audioLevelUpGO.GetComponent<AudioSource>();
         audioDeath = audioDeathGO.GetComponent<AudioSource>();
 

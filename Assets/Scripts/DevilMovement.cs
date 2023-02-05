@@ -32,8 +32,6 @@ public class DevilMovement : MonoBehaviour
     {
         pm = PlantsGO.GetComponent<PlantManager>();
 
-        unpaused = true;
-
         devilIndex = centreIndex;
         UpdatePosition();
         moveTimer = 0;

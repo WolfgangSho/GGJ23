@@ -41,8 +41,6 @@ public class GrubManager : MonoBehaviour
         {
             activeGrubs[i] = false;
         }
-
-        unpaused = true;
     }
 
     int movingGrubs()
