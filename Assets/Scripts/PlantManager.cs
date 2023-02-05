@@ -24,6 +24,10 @@ public class PlantManager : MonoBehaviour
 
     public int[] plantLevel, plantXP;
 
+    public int[] DevilDamageScale, MaxGrubScale;
+    
+    public float[] GrubSpawnMinScale, GrubSpawnMaxScale, DevilMovementMinScale, DevilMovementMaxScale;
+
     List<TextMeshProUGUI> xpText;
 
     AudioSource audioLevelUp, audioDeath;
