@@ -24,68 +24,88 @@ public class DevilMovement : MonoBehaviour
 
     PlantManager pm;
 
+    bool unpaused;
+
 
     // Start is called before the first frame update
     void Start()
     {
         pm = PlantsGO.GetComponent<PlantManager>();
+
+        unpaused = true;
+
         devilIndex = centreIndex;
         UpdatePosition();
         moveTimer = 0;
+
+
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(moveTimer > 0)
+        if(unpaused)
         {
-            moveTimer -= Time.deltaTime;
-
-            if(moveTimer <= 0)
+            if(moveTimer > 0)
             {
-                moveTimer = 0;
-            }
-        }
-        else if (moveTimer == 0)
-        {
-            int desiredIndex = Random.Range(0,maxIndex+1);
+                moveTimer -= Time.deltaTime;
 
-            if(desiredIndex < devilIndex)
+                if(moveTimer <= 0)
+                {
+                    moveTimer = 0;
+                }
+            }
+            else if (moveTimer == 0)
             {
-                devilIndex--;
+                int desiredIndex = Random.Range(0,maxIndex+1);
+
+                if(desiredIndex < devilIndex)
+                {
+                    devilIndex--;
+                }
+                else if(desiredIndex > devilIndex)
+                {
+                    devilIndex++;
+                }
+
+    //            Debug.Log(desiredIndex);
+
+                UpdatePosition();
+
+                moveTimer = Random.Range(minTimeToMove,maxTimeToMove);
             }
-            else if(desiredIndex > devilIndex)
+
+            if(damageTimer == 0)
             {
-                devilIndex++;
+                pm.AlterPlantXP(devilIndex,-damageAmount);
+                damageTimer = damageTick;
             }
-
-//            Debug.Log(desiredIndex);
-
-            UpdatePosition();
-
-            moveTimer = Random.Range(minTimeToMove,maxTimeToMove);
-        }
-
-        if(damageTimer == 0)
-        {
-            pm.AlterPlantXP(devilIndex,-damageAmount);
-            damageTimer = damageTick;
-        }
-        else
-        {
-            damageTimer -= Time.deltaTime;
-
-            if(damageTimer < 0)
+            else
             {
-                damageTimer = 0;
+                damageTimer -= Time.deltaTime;
+
+                if(damageTimer < 0)
+                {
+                    damageTimer = 0;
+                }
             }
-        }
+        } 
     }
 
     void UpdatePosition()
     {
         float pos = devilIndex * moveAmount;
         transform.localPosition = new Vector3(pos,0,0);
+    }
+
+    public void Pause()
+    {
+        unpaused = false;
+    }
+
+    public void UnPause()
+    {
+        unpaused = true;
     }
 }

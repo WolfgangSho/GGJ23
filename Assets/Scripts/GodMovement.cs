@@ -47,6 +47,8 @@ public class GodMovement : MonoBehaviour
 
     AudioSource audioHeal;
 
+    bool unpaused;
+
     
 
     // Start is called before the first frame update
@@ -64,6 +66,8 @@ public class GodMovement : MonoBehaviour
         ableToMove = true;
         healsLeft = startingHeals;
 
+        unpaused = true;
+
         UpdatePosition();
         UpdateHealsText();
     }
@@ -71,71 +75,74 @@ public class GodMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float direction = Input.GetAxisRaw("Horizontal");
-
-        if(ableToMove && powerTimer == 0)
+        if(unpaused)
         {
-            if(direction > 0.5f)
+            float direction = Input.GetAxisRaw("Horizontal");
+
+            if(ableToMove && powerTimer == 0)
             {
-                moveGod(false);
-            }
-            else if (direction < -0.5f)
-            {
-                moveGod(true);
-            }
-        }
-
-        if(moveTimer > 0)
-        {
-            moveTimer-= Time.deltaTime;
-
-            if(moveTimer <= 0)
-            {
-                ableToMove = true;
-                moveTimer = 0;
-            }
-        }
-
-        if(Input.GetButtonDown("Fire1") && !particles.activeSelf && healsLeft > 0)
-        {
-            particles.SetActive(true);
-            powerTimer = healDuration;
-
-            healsLeft += grub.killGrub(godIndex);
-
-            if(healsLeft > maxHeals)
-            {
-                healsLeft = maxHeals;
+                if(direction > 0.5f)
+                {
+                    moveGod(false);
+                }
+                else if (direction < -0.5f)
+                {
+                    moveGod(true);
+                }
             }
 
-            UpdateHealsText();
-
-            audioHeal.Stop();
-            audioHeal.Play();
-        }
-
-        if(healTimer == 0 && powerTimer > 0)
-        {
-            pm.AlterPlantXP(godIndex,healAmount);
-            healTimer = healTick;
-            
-        }
-        else
-        {
-            healTimer -= Time.deltaTime;
-
-            if(healTimer < 0)
+            if(moveTimer > 0)
             {
-                healTimer = 0;
+                moveTimer-= Time.deltaTime;
+
+                if(moveTimer <= 0)
+                {
+                    ableToMove = true;
+                    moveTimer = 0;
+                }
             }
-        }
 
-        powerTimer -= Time.deltaTime;
+            if(Input.GetButtonDown("Fire1") && !particles.activeSelf && healsLeft > 0)
+            {
+                particles.SetActive(true);
+                powerTimer = healDuration;
 
-        if(powerTimer <= 0)
-        {
-            powerTimer = 0;
-            particles.SetActive(false);
+                healsLeft += grub.killGrub(godIndex);
+
+                if(healsLeft > maxHeals)
+                {
+                    healsLeft = maxHeals;
+                }
+
+                UpdateHealsText();
+
+                audioHeal.Stop();
+                audioHeal.Play();
+            }
+
+            if(healTimer == 0 && powerTimer > 0)
+            {
+                pm.AlterPlantXP(godIndex,healAmount);
+                healTimer = healTick;
+                
+            }
+            else
+            {
+                healTimer -= Time.deltaTime;
+
+                if(healTimer < 0)
+                {
+                    healTimer = 0;
+                }
+            }
+
+            powerTimer -= Time.deltaTime;
+
+            if(powerTimer <= 0)
+            {
+                powerTimer = 0;
+                particles.SetActive(false);
+            }
         }
     }
 
@@ -175,5 +182,15 @@ public class GodMovement : MonoBehaviour
     void UpdateHealsText()
     {
         healsText.SetText(healsLeft.ToString());
+    }
+
+    public void Pause()
+    {
+        unpaused = false;
+    }
+
+    public void Unpause()
+    {
+        unpaused = true;
     }
 }

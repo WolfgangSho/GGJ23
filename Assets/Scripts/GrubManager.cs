@@ -27,6 +27,8 @@ public class GrubManager : MonoBehaviour
 
     PlantManager pm;
 
+    bool unpaused;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +41,8 @@ public class GrubManager : MonoBehaviour
         {
             activeGrubs[i] = false;
         }
+
+        unpaused = true;
     }
 
     int movingGrubs()
@@ -74,59 +78,69 @@ public class GrubManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(movingGrubs() != maxGrubs)
+        if(unpaused)
         {
-            timer -= Time.deltaTime;
-        }
-
-        if(timer <= 0)
-        {
-            //pick a currently inactive grub
-
-            bool grubFound = false;
-            int iterations = 0;
-            int chosenGrub = -1;
-
-            while(!grubFound)
+            if(movingGrubs() != maxGrubs)
             {
-                chosenGrub = Random.Range(0,activeGrubs.Length);
+                timer -= Time.deltaTime;
+            }
 
-                if(!activeGrubs[chosenGrub])
+            if(timer <= 0)
+            {
+                //pick a currently inactive grub
+
+                bool grubFound = false;
+                int iterations = 0;
+                int chosenGrub = -1;
+
+                while(!grubFound)
                 {
-                    grubFound = true;
+                    chosenGrub = Random.Range(0,activeGrubs.Length);
+
+                    if(!activeGrubs[chosenGrub])
+                    {
+                        grubFound = true;
+                    }
+
+                    iterations++;
+
+                    if(iterations > 10000)
+                    {
+                        break;
+                    }
                 }
 
-                iterations++;
+                activeGrubs[chosenGrub] = true;
 
-                if(iterations > 10000)
+                timer = Random.Range(minTime,maxTime);
+            }
+
+            for(int i=0; i<activeGrubs.Length;i++)
+            {
+                if(activeGrubs[i])
                 {
-                    break;
+                    grubGOs[i].transform.Translate(new Vector3(0,Time.deltaTime * grubSpeed,0));
+                }
+
+                if(grubGOs[i].transform.localPosition.y > maxGrubHeight)
+                {
+                    //call damage effect
+                    pm.AlterPlantXP(i,-500);
+                    //reset grub
+                    grubGOs[i].transform.localPosition = Vector3.zero;
+                    activeGrubs[i] = false;   
                 }
             }
-
-            activeGrubs[chosenGrub] = true;
-
-            timer = Random.Range(minTime,maxTime);
         }
-
-        for(int i=0; i<activeGrubs.Length;i++)
-        {
-            if(activeGrubs[i])
-            {
-                grubGOs[i].transform.Translate(new Vector3(0,Time.deltaTime * grubSpeed,0));
-            }
-
-            if(grubGOs[i].transform.localPosition.y > maxGrubHeight)
-            {
-                //call damage effect
-                pm.AlterPlantXP(i,-500);
-                //reset grub
-                grubGOs[i].transform.localPosition = Vector3.zero;
-                activeGrubs[i] = false;   
-            }
-        }
-        
     }
 
+    public void Pause()
+    {
+        unpaused = false;
+    }
 
+    public void UnPause()
+    {
+        unpaused = true;
+    }
 }
