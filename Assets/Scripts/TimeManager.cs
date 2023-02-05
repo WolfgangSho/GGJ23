@@ -5,7 +5,7 @@ using TMPro;
 
 public class TimeManager : MonoBehaviour
 {
-    public GameObject StartScreen;
+    public GameObject StartScreen,HowToScreen,About1Screen,About2Screen;
     
     public GameObject CanvasHolder, GodHolder,MoonHolder,DevilHolder,GrubHolder;
 
@@ -35,6 +35,12 @@ public class TimeManager : MonoBehaviour
         moonText = moonTextGO.GetComponent<TextMeshProUGUI>();
         timeLeft = timeLimit;
 
+        FailScreen.SetActive(false);
+
+
+        HowToScreen.SetActive(false);
+        About1Screen.SetActive(false);
+        About2Screen.SetActive(false);
 
         StartScreen.SetActive(true);
         Pause();       
@@ -44,6 +50,33 @@ public class TimeManager : MonoBehaviour
     {
         StartScreen.SetActive(false);
         UnPause();
+    }
+
+    public void BackButton()
+    {
+        HowToScreen.SetActive(false);
+        About1Screen.SetActive(false);
+        About2Screen.SetActive(false);
+    }
+
+    public void HowToButton()
+    {
+        HowToScreen.SetActive(true);
+    }
+
+    public void AboutButton()
+    {
+        About1Screen.SetActive(true);
+    }
+
+    public void AboutBack()
+    {
+        About2Screen.SetActive(false);
+    }
+
+    public void AboutNext()
+    {
+        About2Screen.SetActive(true);
     }
 
     void SetMoonText()
