@@ -57,6 +57,40 @@ public class TimeManager : MonoBehaviour
         Pause();       
     }
 
+    float Scale()
+    {
+        float scaled = timeLeft/(timeLimit*0.8f);
+
+        if(scaled > 1)
+        {
+            scaled = 1;
+        }
+
+        return scaled;
+    }
+
+    int ScaledInt(int[] scalar)
+    {
+        float scaled = Scale();
+
+        float diff = scalar[1] - scalar[0];
+
+        float toAdd = diff * scaled;
+
+        return Mathf.CeilToInt(scalar[0] + toAdd);
+    }
+
+    float ScaledFloat(float[] scalar)
+    {
+        float scaled = Scale();
+
+        float diff = scalar[1] - scalar[0];
+
+        float toAdd = diff * scaled;
+
+        return scalar[0] + toAdd;
+    }
+
     public void PlayGame()
     {
         StartScreen.SetActive(false);
@@ -143,11 +177,18 @@ public class TimeManager : MonoBehaviour
 
             SetMoonText();
 
+            SetScalars();
+
             if(timeLeft <= 0)
             {
                 GameEnd(true);
             }
         }
+    }
+
+    void SetScalars()
+    {
+        Debug.Log(ScaledFloat(DevilMovementMinScale));
     }
 
     public void GameEnd(bool win)

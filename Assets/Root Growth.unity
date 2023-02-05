@@ -374,7 +374,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d4780dc1205c7c7478c970d8c61d24e8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6f6f51333d2af6e459c8b693a3dc2a53, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1158,7 +1158,7 @@ MonoBehaviour:
   minTime: 0.7
   maxTime: 0.7
   grubSpeed: 0.4
-  delayBeforeFirstGrub: 0
+  delayBeforeFirstGrub: 25
   maxGrubs: 3
   rewardAmount: 2
   maxGrubHeight: 6
@@ -6178,6 +6178,12 @@ MonoBehaviour:
   audioDeathGO: {fileID: 2130743458}
   plantLevel: 
   plantXP: 
+  DevilDamageScale: 
+  MaxGrubScale: 
+  GrubSpawnMinScale: []
+  GrubSpawnMaxScale: []
+  DevilMovementMinScale: []
+  DevilMovementMaxScale: []
 --- !u!1 &242821512
 GameObject:
   m_ObjectHideFlags: 0
@@ -6293,7 +6299,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d5129870e8bda8e48adfad388af89182, type: 3}
+  m_Sprite: {fileID: 21300000, guid: be158505743a52f4c82c9503d80fd70a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6933,7 +6939,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d5129870e8bda8e48adfad388af89182, type: 3}
+  m_Sprite: {fileID: 21300000, guid: be158505743a52f4c82c9503d80fd70a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8025,7 +8031,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d5129870e8bda8e48adfad388af89182, type: 3}
+  m_Sprite: {fileID: 21300000, guid: be158505743a52f4c82c9503d80fd70a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8302,6 +8308,20 @@ MonoBehaviour:
   ScoreTextGO: {fileID: 322440628}
   timeLimit: 20
   moonTextGO: {fileID: 1860123247}
+  DevilDamageScale: 0100000004000000
+  MaxGrubScale: 0100000004000000
+  GrubSpawnMinScale:
+  - 3
+  - 1
+  GrubSpawnMaxScale:
+  - 5
+  - 0.6
+  DevilMovementMinScale:
+  - 0.9
+  - 0.04
+  DevilMovementMaxScale:
+  - 1.5
+  - 0.2
 --- !u!1 &637651695
 GameObject:
   m_ObjectHideFlags: 0
@@ -15536,7 +15556,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1367004649
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16160,7 +16180,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1438352673
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16823,7 +16843,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1594386779
 RectTransform:
   m_ObjectHideFlags: 0
