@@ -35,8 +35,15 @@ public class TimeManager : MonoBehaviour
         moonText = moonTextGO.GetComponent<TextMeshProUGUI>();
         timeLeft = timeLimit;
 
+
+        StartScreen.SetActive(true);
+        Pause();       
+    }
+
+    public void PlayGame()
+    {
+        StartScreen.SetActive(false);
         UnPause();
-        
     }
 
     void SetMoonText()
