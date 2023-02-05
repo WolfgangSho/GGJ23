@@ -78,6 +78,11 @@ public class PlantManager : MonoBehaviour
         else
         {
             plantXP[plant] += val;
+
+            if(plantXP[plant] > 100 * plantLevel[plant])
+            {
+                plantXP[plant] = 100 * plantLevel[plant];
+            }
         }
         
         if(plantXP[plant] > (100 * plantLevel[plant]) && plantLevel[plant] != maxLevel)
