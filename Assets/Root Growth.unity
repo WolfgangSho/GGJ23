@@ -7390,10 +7390,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a509ed0fda0448c478a49087ede4ceb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanvasHolder: {fileID: 878310242}
   GodHolder: {fileID: 1045498539}
   MoonHolder: {fileID: 1410254366}
   DevilHolder: {fileID: 1217161966}
   GrubHolder: {fileID: 196707701}
+  FailScreen: {fileID: 927912884}
+  WinScreen: {fileID: 0}
   timeLimit: 139
   moonTextGO: {fileID: 1860123247}
 --- !u!1 &637651695

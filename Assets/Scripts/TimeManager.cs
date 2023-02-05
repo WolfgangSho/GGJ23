@@ -6,6 +6,8 @@ using TMPro;
 public class TimeManager : MonoBehaviour
 {
     public GameObject CanvasHolder, GodHolder,MoonHolder,DevilHolder,GrubHolder;
+
+    public GameObject FailScreen, WinScreen;
     public float timeLimit;
     public GameObject moonTextGO;
 
@@ -92,6 +94,19 @@ public class TimeManager : MonoBehaviour
             {
                 //do something
             }
+        }
+    }
+
+    public void GameEnd(bool win)
+    {
+        if(win)
+        {
+
+        }
+        else
+        {
+            FailScreen.SetActive(true);
+            Pause();
         }
     }
 }

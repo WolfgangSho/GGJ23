@@ -138,6 +138,21 @@ public class PlantManager : MonoBehaviour
             if(level == 0)
             {
                  plantLevel[plant] = -1;
+
+                 int deadbois = 0;
+
+                 for(int i=0; i<plantLevel.Length; i++)
+                 {
+                    if(plantLevel[i] == -1)
+                    {
+                        deadbois++;
+                    }
+                 }
+
+                 if(deadbois == plantLevel.Length)
+                 {
+                    tim.GameEnd(false);
+                 }
             }
         }
 
