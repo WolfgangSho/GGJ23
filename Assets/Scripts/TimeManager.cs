@@ -5,6 +5,8 @@ using TMPro;
 
 public class TimeManager : MonoBehaviour
 {
+    public GameObject StartScreen;
+    
     public GameObject CanvasHolder, GodHolder,MoonHolder,DevilHolder,GrubHolder;
 
     public GameObject FailScreen, WinScreen;
